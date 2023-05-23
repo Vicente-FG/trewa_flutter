@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/change_password/change_password_widget.dart';
 import '/pages/edit_user_profile/edit_user_profile_widget.dart';
-import '/pages/login/login_widget.dart';
+import '/pages/onboarding1/onboarding1_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
