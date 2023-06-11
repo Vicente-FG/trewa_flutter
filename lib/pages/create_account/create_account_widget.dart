@@ -69,9 +69,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(24.0, 56.0, 0.0, 0.0),
                     child: Image.asset(
-                      'assets/images/logoSniff@2x.png',
+                      'assets/images/Azul_con_nariz.png',
                       width: 140.0,
-                      height: 40.0,
+                      height: 60.0,
                       fit: BoxFit.fitWidth,
                     ),
                   ),
@@ -106,7 +106,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Welcome,',
+                            'Bienvenido,',
                             style: FlutterFlowTheme.of(context).displaySmall,
                           ),
                         ],
@@ -124,7 +124,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                'Create your account below, or',
+                                'Crea tu cuenta o',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               FFButtonWidget(
@@ -140,9 +140,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                     ),
                                   );
                                 },
-                                text: 'Login',
+                                text: 'Ingresa aquí',
                                 options: FFButtonOptions(
-                                  width: 70.0,
+                                  width: 93.0,
                                   height: 28.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
@@ -193,7 +193,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                             controller: _model.emailController,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Your email...',
+                              labelText: 'Tu correo...',
                               labelStyle:
                                   FlutterFlowTheme.of(context).bodySmall,
                               enabledBorder: OutlineInputBorder(
@@ -257,7 +257,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                             controller: _model.passwordController,
                             obscureText: !_model.passwordVisibility,
                             decoration: InputDecoration(
-                              labelText: 'Password',
+                              labelText: 'Contraseña',
                               labelStyle:
                                   FlutterFlowTheme.of(context).bodySmall,
                               enabledBorder: OutlineInputBorder(
@@ -344,7 +344,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                   (r) => false,
                                 );
                               },
-                              text: 'Create Account',
+                              text: 'Crear Cuenta',
                               options: FFButtonOptions(
                                 width: 170.0,
                                 height: 50.0,
@@ -369,46 +369,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 12.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 200),
-                              reverseDuration: Duration(milliseconds: 200),
-                              child: CreateAccountWidget(),
-                            ),
-                          );
-                        },
-                        text: 'Continue as guest',
-                        options: FFButtonOptions(
-                          width: 200.0,
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: Color(0x00FFFFFF),
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).secondary,
-                                fontSize: 14.0,
-                              ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
                       ),
                     ),
                   ],

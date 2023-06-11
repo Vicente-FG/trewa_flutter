@@ -85,9 +85,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
             backgroundColor: Color(0x00000000),
             barrierColor: Color(0x00000000),
             context: context,
-            builder: (bottomSheetContext) {
+            builder: (context) {
               return Padding(
-                padding: MediaQuery.of(bottomSheetContext).viewInsets,
+                padding: MediaQuery.of(context).viewInsets,
                 child: Container(
                   height: 240.0,
                   child: CreateModalWidget(),
@@ -113,13 +113,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
             if (Theme.of(context).brightness == Brightness.light)
               Image.asset(
                 'assets/images/logoSniff_dark@3x.png',
-                width: 120.0,
-                height: 50.0,
-                fit: BoxFit.fitWidth,
-              ),
-            if (Theme.of(context).brightness == Brightness.dark)
-              Image.asset(
-                'assets/images/logoSniff@2x.png',
                 width: 120.0,
                 height: 50.0,
                 fit: BoxFit.fitWidth,

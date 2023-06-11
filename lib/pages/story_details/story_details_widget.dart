@@ -29,11 +29,6 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
   late StoryDetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  int get pageViewCurrentIndex => _model.pageViewController != null &&
-          _model.pageViewController!.hasClients &&
-          _model.pageViewController!.page != null
-      ? _model.pageViewController!.page!.round()
-      : 0;
 
   @override
   void initState() {
@@ -323,10 +318,10 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
                                                                       context:
                                                                           context,
                                                                       builder:
-                                                                          (bottomSheetContext) {
+                                                                          (context) {
                                                                         return Padding(
                                                                           padding:
-                                                                              MediaQuery.of(bottomSheetContext).viewInsets,
+                                                                              MediaQuery.of(context).viewInsets,
                                                                           child:
                                                                               Container(
                                                                             height:
@@ -467,10 +462,9 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
                                             backgroundColor: Color(0x00000000),
                                             barrierColor: Color(0x00000000),
                                             context: context,
-                                            builder: (bottomSheetContext) {
+                                            builder: (context) {
                                               return Padding(
-                                                padding: MediaQuery.of(
-                                                        bottomSheetContext)
+                                                padding: MediaQuery.of(context)
                                                     .viewInsets,
                                                 child: Container(
                                                   height: 600.0,

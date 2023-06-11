@@ -136,6 +136,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Onboarding2': (data) async => Onboarding2Widget(
         index: getParameter(data, 'index'),
       ),
+  'Home': (data) async => NavBarPage(initialPage: 'Home'),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

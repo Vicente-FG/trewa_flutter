@@ -44,6 +44,11 @@ class DogsRecord extends FirestoreRecord {
   String get dogBio => _dogBio ?? '';
   bool hasDogBio() => _dogBio != null;
 
+  // "dogSize" field.
+  String? _dogSize;
+  String get dogSize => _dogSize ?? '';
+  bool hasDogSize() => _dogSize != null;
+
   void _initializeFields() {
     _userAssociation = snapshotData['userAssociation'] as DocumentReference?;
     _dogPhoto = snapshotData['dogPhoto'] as String?;
@@ -51,6 +56,7 @@ class DogsRecord extends FirestoreRecord {
     _dogType = snapshotData['dogType'] as String?;
     _dogAge = snapshotData['dogAge'] as String?;
     _dogBio = snapshotData['dogBio'] as String?;
+    _dogSize = snapshotData['dogSize'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -76,6 +82,14 @@ class DogsRecord extends FirestoreRecord {
   @override
   String toString() =>
       'DogsRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is DogsRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createDogsRecordData({
@@ -85,6 +99,7 @@ Map<String, dynamic> createDogsRecordData({
   String? dogType,
   String? dogAge,
   String? dogBio,
+  String? dogSize,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -94,6 +109,7 @@ Map<String, dynamic> createDogsRecordData({
       'dogType': dogType,
       'dogAge': dogAge,
       'dogBio': dogBio,
+      'dogSize': dogSize,
     }.withoutNulls,
   );
 

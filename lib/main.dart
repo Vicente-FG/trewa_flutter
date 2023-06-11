@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
@@ -16,6 +17,7 @@ import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
@@ -130,8 +132,9 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'homePage': HomePageWidget(),
-      'allChatsPage': AllChatsPageWidget(),
       'profilePage': ProfilePageWidget(),
+      'allChatsPage': AllChatsPageWidget(),
+      'Home': HomeWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -160,6 +163,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.account_circle_outlined,
+              size: 24.0,
+            ),
+            activeIcon: Icon(
+              Icons.account_circle,
+              size: 24.0,
+            ),
+            label: 'Profile',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.chat_bubble_outline,
               size: 24.0,
             ),
@@ -172,14 +187,14 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.account_circle_outlined,
+              Icons.dashboard_outlined,
               size: 24.0,
             ),
             activeIcon: Icon(
-              Icons.account_circle,
-              size: 24.0,
+              Icons.dashboard_rounded,
+              size: 32.0,
             ),
-            label: 'Profile',
+            label: '__',
             tooltip: '',
           )
         ],

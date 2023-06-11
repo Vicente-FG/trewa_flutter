@@ -36,3 +36,4 @@ export '/pages/onboarding1/onboarding1_widget.dart' show Onboarding1Widget;
 export '/pages/onboarding3/onboarding3_widget.dart' show Onboarding3Widget;
 export '/pages/onboarding4/onboarding4_widget.dart' show Onboarding4Widget;
 export '/pages/onboarding2/onboarding2_widget.dart' show Onboarding2Widget;
+export '/pages/home/home_widget.dart' show HomeWidget;

@@ -56,12 +56,15 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: CircularProgressIndicator(
-                color: FlutterFlowTheme.of(context).primary,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: CircularProgressIndicator(
+                  color: FlutterFlowTheme.of(context).primary,
+                ),
               ),
             ),
           );
@@ -150,10 +153,9 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                           backgroundColor: Color(0x00000000),
                                           barrierColor: Color(0x00000000),
                                           context: context,
-                                          builder: (bottomSheetContext) {
+                                          builder: (context) {
                                             return Padding(
-                                              padding: MediaQuery.of(
-                                                      bottomSheetContext)
+                                              padding: MediaQuery.of(context)
                                                   .viewInsets,
                                               child: Container(
                                                 height: 250.0,

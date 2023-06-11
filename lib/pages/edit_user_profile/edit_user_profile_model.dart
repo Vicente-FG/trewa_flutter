@@ -39,6 +39,8 @@ class EditUserProfileModel extends FlutterFlowModel {
     bioController?.dispose();
   }
 
+  /// Action blocks are added here.
+
   /// Additional helper methods are added here.
 
 }

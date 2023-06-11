@@ -31,6 +31,8 @@ class CreateAccountModel extends FlutterFlowModel {
     passwordController?.dispose();
   }
 
+  /// Action blocks are added here.
+
   /// Additional helper methods are added here.
 
 }

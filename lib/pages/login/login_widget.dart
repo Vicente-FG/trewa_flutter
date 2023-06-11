@@ -413,51 +413,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 12.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          final user =
-                              await authManager.signInAnonymously(context);
-                          if (user == null) {
-                            return;
-                          }
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PushNotificationsHandler(
-                                child: NavBarPage(initialPage: 'homePage'),
-                              ),
-                            ),
-                            (r) => false,
-                          );
-                        },
-                        text: 'Continue as guest',
-                        options: FFButtonOptions(
-                          width: 200.0,
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: Color(0x00FFFFFF),
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).secondary,
-                                fontSize: 14.0,
-                              ),
-                          elevation: 0.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
