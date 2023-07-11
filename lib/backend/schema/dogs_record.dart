@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -18,11 +20,6 @@ class DogsRecord extends FirestoreRecord {
   DocumentReference? _userAssociation;
   DocumentReference? get userAssociation => _userAssociation;
   bool hasUserAssociation() => _userAssociation != null;
-
-  // "dogPhoto" field.
-  String? _dogPhoto;
-  String get dogPhoto => _dogPhoto ?? '';
-  bool hasDogPhoto() => _dogPhoto != null;
 
   // "dogName" field.
   String? _dogName;
@@ -49,14 +46,37 @@ class DogsRecord extends FirestoreRecord {
   String get dogSize => _dogSize ?? '';
   bool hasDogSize() => _dogSize != null;
 
+  // "dogPhoto" field.
+  List<String>? _dogPhoto;
+  List<String> get dogPhoto => _dogPhoto ?? const [];
+  bool hasDogPhoto() => _dogPhoto != null;
+
+  // "agua" field.
+  double? _agua;
+  double get agua => _agua ?? 0.0;
+  bool hasAgua() => _agua != null;
+
+  // "alimentacion" field.
+  double? _alimentacion;
+  double get alimentacion => _alimentacion ?? 0.0;
+  bool hasAlimentacion() => _alimentacion != null;
+
+  // "actividad" field.
+  double? _actividad;
+  double get actividad => _actividad ?? 0.0;
+  bool hasActividad() => _actividad != null;
+
   void _initializeFields() {
     _userAssociation = snapshotData['userAssociation'] as DocumentReference?;
-    _dogPhoto = snapshotData['dogPhoto'] as String?;
     _dogName = snapshotData['dogName'] as String?;
     _dogType = snapshotData['dogType'] as String?;
     _dogAge = snapshotData['dogAge'] as String?;
     _dogBio = snapshotData['dogBio'] as String?;
     _dogSize = snapshotData['dogSize'] as String?;
+    _dogPhoto = getDataList(snapshotData['dogPhoto']);
+    _agua = castToType<double>(snapshotData['agua']);
+    _alimentacion = castToType<double>(snapshotData['alimentacion']);
+    _actividad = castToType<double>(snapshotData['actividad']);
   }
 
   static CollectionReference get collection =>
@@ -94,24 +114,64 @@ class DogsRecord extends FirestoreRecord {
 
 Map<String, dynamic> createDogsRecordData({
   DocumentReference? userAssociation,
-  String? dogPhoto,
   String? dogName,
   String? dogType,
   String? dogAge,
   String? dogBio,
   String? dogSize,
+  double? agua,
+  double? alimentacion,
+  double? actividad,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'userAssociation': userAssociation,
-      'dogPhoto': dogPhoto,
       'dogName': dogName,
       'dogType': dogType,
       'dogAge': dogAge,
       'dogBio': dogBio,
       'dogSize': dogSize,
+      'agua': agua,
+      'alimentacion': alimentacion,
+      'actividad': actividad,
     }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class DogsRecordDocumentEquality implements Equality<DogsRecord> {
+  const DogsRecordDocumentEquality();
+
+  @override
+  bool equals(DogsRecord? e1, DogsRecord? e2) {
+    const listEquality = ListEquality();
+    return e1?.userAssociation == e2?.userAssociation &&
+        e1?.dogName == e2?.dogName &&
+        e1?.dogType == e2?.dogType &&
+        e1?.dogAge == e2?.dogAge &&
+        e1?.dogBio == e2?.dogBio &&
+        e1?.dogSize == e2?.dogSize &&
+        listEquality.equals(e1?.dogPhoto, e2?.dogPhoto) &&
+        e1?.agua == e2?.agua &&
+        e1?.alimentacion == e2?.alimentacion &&
+        e1?.actividad == e2?.actividad;
+  }
+
+  @override
+  int hash(DogsRecord? e) => const ListEquality().hash([
+        e?.userAssociation,
+        e?.dogName,
+        e?.dogType,
+        e?.dogAge,
+        e?.dogBio,
+        e?.dogSize,
+        e?.dogPhoto,
+        e?.agua,
+        e?.alimentacion,
+        e?.actividad
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is DogsRecord;
 }

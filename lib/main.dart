@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
-import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -43,7 +42,6 @@ class _MyAppState extends State<MyApp> {
   bool displaySplashImage = true;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
-  final fcmTokenSub = fcmTokenUserStream.listen((_) {});
 
   @override
   void initState() {
@@ -60,7 +58,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     authUserSub.cancel();
-    fcmTokenSub.cancel();
+
     super.dispose();
   }
 
@@ -99,7 +97,7 @@ class _MyAppState extends State<MyApp> {
               ),
             )
           : currentUser!.loggedIn
-              ? PushNotificationsHandler(child: NavBarPage())
+              ? NavBarPage()
               : Onboarding1Widget(),
       navigatorObservers: [routeObserver],
     );
@@ -118,7 +116,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'homePage';
+  String _currentPageName = 'Home';
   late Widget? _currentPage;
 
   @override
@@ -131,10 +129,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'homePage': HomePageWidget(),
       'profilePage': ProfilePageWidget(),
-      'allChatsPage': AllChatsPageWidget(),
       'Home': HomeWidget(),
+      'mapaServicios': MapaServiciosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -155,14 +152,6 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.account_circle_outlined,
               size: 24.0,
             ),
@@ -175,26 +164,22 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.chat_bubble_outline,
+              Icons.home_outlined,
               size: 24.0,
             ),
             activeIcon: Icon(
-              Icons.chat_bubble_outlined,
+              Icons.home,
               size: 24.0,
             ),
-            label: 'Messages',
+            label: '__',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.dashboard_outlined,
+              Icons.map_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
-              Icons.dashboard_rounded,
-              size: 32.0,
-            ),
-            label: '__',
+            label: 'Mapa',
             tooltip: '',
           )
         ],

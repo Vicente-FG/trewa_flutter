@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -66,7 +68,7 @@ class UserPostsRecord extends FirestoreRecord {
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
     _likes = getDataList(snapshotData['likes']);
-    _numComments = snapshotData['numComments'] as int?;
+    _numComments = castToType<int>(snapshotData['numComments']);
     _dogProfile = snapshotData['dogProfile'] as DocumentReference?;
     _postOwner = snapshotData['postOwner'] as bool?;
   }
@@ -129,4 +131,38 @@ Map<String, dynamic> createUserPostsRecordData({
   );
 
   return firestoreData;
+}
+
+class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
+  const UserPostsRecordDocumentEquality();
+
+  @override
+  bool equals(UserPostsRecord? e1, UserPostsRecord? e2) {
+    const listEquality = ListEquality();
+    return e1?.postPhoto == e2?.postPhoto &&
+        e1?.postTitle == e2?.postTitle &&
+        e1?.postDescription == e2?.postDescription &&
+        e1?.postUser == e2?.postUser &&
+        e1?.timePosted == e2?.timePosted &&
+        listEquality.equals(e1?.likes, e2?.likes) &&
+        e1?.numComments == e2?.numComments &&
+        e1?.dogProfile == e2?.dogProfile &&
+        e1?.postOwner == e2?.postOwner;
+  }
+
+  @override
+  int hash(UserPostsRecord? e) => const ListEquality().hash([
+        e?.postPhoto,
+        e?.postTitle,
+        e?.postDescription,
+        e?.postUser,
+        e?.timePosted,
+        e?.likes,
+        e?.numComments,
+        e?.dogProfile,
+        e?.postOwner
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UserPostsRecord;
 }

@@ -129,7 +129,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                             return Center(
                               child: Image.asset(
                                 'assets/images/commentsEmpty@2x.png',
-                                width: MediaQuery.of(context).size.width * 0.8,
+                                width: MediaQuery.sizeOf(context).width * 0.8,
                                 height: 300.0,
                               ),
                             );
@@ -303,7 +303,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 1.0,
+                  width: MediaQuery.sizeOf(context).width * 1.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     boxShadow: [
@@ -380,23 +380,19 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            final storyCommentsCreateData =
-                                createStoryCommentsRecordData(
-                              storyAssociation:
-                                  columnUserStoriesRecord.reference,
-                              commentUser: currentUserReference,
-                              comment: _model.textController.text,
-                              timePosted: getCurrentTimestamp,
-                            );
                             await StoryCommentsRecord.collection
                                 .doc()
-                                .set(storyCommentsCreateData);
+                                .set(createStoryCommentsRecordData(
+                                  storyAssociation:
+                                      columnUserStoriesRecord.reference,
+                                  commentUser: columnUserStoriesRecord.user,
+                                  comment: _model.textController.text,
+                                  timePosted: getCurrentTimestamp,
+                                ));
 
-                            final userStoriesUpdateData = {
+                            await columnUserStoriesRecord.reference.update({
                               'numComments': FieldValue.increment(1),
-                            };
-                            await columnUserStoriesRecord.reference
-                                .update(userStoriesUpdateData);
+                            });
                           },
                           text: 'Post',
                           options: FFButtonOptions(

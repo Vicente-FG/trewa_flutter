@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -61,7 +63,7 @@ class UserStoriesRecord extends FirestoreRecord {
     _storyDescription = snapshotData['storyDescription'] as String?;
     _storyPostedAt = snapshotData['storyPostedAt'] as DateTime?;
     _likes = getDataList(snapshotData['likes']);
-    _numComments = snapshotData['numComments'] as int?;
+    _numComments = castToType<int>(snapshotData['numComments']);
     _isOwner = snapshotData['isOwner'] as bool?;
   }
 
@@ -121,4 +123,36 @@ Map<String, dynamic> createUserStoriesRecordData({
   );
 
   return firestoreData;
+}
+
+class UserStoriesRecordDocumentEquality implements Equality<UserStoriesRecord> {
+  const UserStoriesRecordDocumentEquality();
+
+  @override
+  bool equals(UserStoriesRecord? e1, UserStoriesRecord? e2) {
+    const listEquality = ListEquality();
+    return e1?.user == e2?.user &&
+        e1?.storyVideo == e2?.storyVideo &&
+        e1?.storyPhoto == e2?.storyPhoto &&
+        e1?.storyDescription == e2?.storyDescription &&
+        e1?.storyPostedAt == e2?.storyPostedAt &&
+        listEquality.equals(e1?.likes, e2?.likes) &&
+        e1?.numComments == e2?.numComments &&
+        e1?.isOwner == e2?.isOwner;
+  }
+
+  @override
+  int hash(UserStoriesRecord? e) => const ListEquality().hash([
+        e?.user,
+        e?.storyVideo,
+        e?.storyPhoto,
+        e?.storyDescription,
+        e?.storyPostedAt,
+        e?.likes,
+        e?.numComments,
+        e?.isOwner
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UserStoriesRecord;
 }

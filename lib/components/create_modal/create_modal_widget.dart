@@ -1,7 +1,7 @@
+import '/components/pages/create_post/create_post_widget.dart';
+import '/components/pages/create_story/create_story_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/pages/create_post/create_post_widget.dart';
-import '/pages/create_story/create_story_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +63,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                await Navigator.push(
+                Navigator.push(
                   context,
                   PageTransition(
                     type: PageTransitionType.bottomToTop,
@@ -74,7 +74,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                 );
               },
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.sizeOf(context).width * 0.9,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primaryBackground,
                   boxShadow: [
@@ -123,7 +123,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery.sizeOf(context).width * 0.9,
               height: 0.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).dark600,
@@ -190,7 +190,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              await Navigator.push(
+              Navigator.push(
                 context,
                 PageTransition(
                   type: PageTransitionType.bottomToTop,
@@ -201,7 +201,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
               );
             },
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery.sizeOf(context).width * 0.9,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
                 boxShadow: [

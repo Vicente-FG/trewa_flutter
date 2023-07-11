@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -59,6 +61,26 @@ class UsersRecord extends FirestoreRecord {
   bool get isFollowed => _isFollowed ?? false;
   bool hasIsFollowed() => _isFollowed != null;
 
+  // "dni" field.
+  String? _dni;
+  String get dni => _dni ?? '';
+  bool hasDni() => _dni != null;
+
+  // "premium" field.
+  bool? _premium;
+  bool get premium => _premium ?? false;
+  bool hasPremium() => _premium != null;
+
+  // "type" field.
+  String? _type;
+  String get type => _type ?? '';
+  bool hasType() => _type != null;
+
+  // "coins" field.
+  int? _coins;
+  int get coins => _coins ?? 0;
+  bool hasCoins() => _coins != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -69,6 +91,10 @@ class UsersRecord extends FirestoreRecord {
     _userName = snapshotData['userName'] as String?;
     _bio = snapshotData['bio'] as String?;
     _isFollowed = snapshotData['isFollowed'] as bool?;
+    _dni = snapshotData['dni'] as String?;
+    _premium = snapshotData['premium'] as bool?;
+    _type = snapshotData['type'] as String?;
+    _coins = castToType<int>(snapshotData['coins']);
   }
 
   static CollectionReference get collection =>
@@ -114,6 +140,10 @@ Map<String, dynamic> createUsersRecordData({
   String? userName,
   String? bio,
   bool? isFollowed,
+  String? dni,
+  bool? premium,
+  String? type,
+  int? coins,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -126,8 +156,53 @@ Map<String, dynamic> createUsersRecordData({
       'userName': userName,
       'bio': bio,
       'isFollowed': isFollowed,
+      'dni': dni,
+      'premium': premium,
+      'type': type,
+      'coins': coins,
     }.withoutNulls,
   );
 
   return firestoreData;
+}
+
+class UsersRecordDocumentEquality implements Equality<UsersRecord> {
+  const UsersRecordDocumentEquality();
+
+  @override
+  bool equals(UsersRecord? e1, UsersRecord? e2) {
+    return e1?.displayName == e2?.displayName &&
+        e1?.email == e2?.email &&
+        e1?.photoUrl == e2?.photoUrl &&
+        e1?.uid == e2?.uid &&
+        e1?.createdTime == e2?.createdTime &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.userName == e2?.userName &&
+        e1?.bio == e2?.bio &&
+        e1?.isFollowed == e2?.isFollowed &&
+        e1?.dni == e2?.dni &&
+        e1?.premium == e2?.premium &&
+        e1?.type == e2?.type &&
+        e1?.coins == e2?.coins;
+  }
+
+  @override
+  int hash(UsersRecord? e) => const ListEquality().hash([
+        e?.displayName,
+        e?.email,
+        e?.photoUrl,
+        e?.uid,
+        e?.createdTime,
+        e?.phoneNumber,
+        e?.userName,
+        e?.bio,
+        e?.isFollowed,
+        e?.dni,
+        e?.premium,
+        e?.type,
+        e?.coins
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is UsersRecord;
 }

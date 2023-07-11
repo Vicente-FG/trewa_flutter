@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -75,4 +77,20 @@ Map<String, dynamic> createFriendsRecordData({
   );
 
   return firestoreData;
+}
+
+class FriendsRecordDocumentEquality implements Equality<FriendsRecord> {
+  const FriendsRecordDocumentEquality();
+
+  @override
+  bool equals(FriendsRecord? e1, FriendsRecord? e2) {
+    return e1?.follower == e2?.follower && e1?.followee == e2?.followee;
+  }
+
+  @override
+  int hash(FriendsRecord? e) =>
+      const ListEquality().hash([e?.follower, e?.followee]);
+
+  @override
+  bool isValidKey(Object? o) => o is FriendsRecord;
 }

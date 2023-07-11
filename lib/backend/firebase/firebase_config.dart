@@ -5,13 +5,13 @@ Future initFirebase() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
-            apiKey: "AIzaSyCy4xXswSJ2opZgK8_Hmtm9qZ_I1WLyUt8",
-            authDomain: "sniffsocial.firebaseapp.com",
-            projectId: "sniffsocial",
-            storageBucket: "sniffsocial.appspot.com",
-            messagingSenderId: "768238167223",
-            appId: "1:768238167223:web:d2924386412f22e20e9932",
-            measurementId: "G-DWSYG7607T"));
+            apiKey: "AIzaSyDyXcFYFkmJDhsTa-KL7cb-67tnkFEJtTw",
+            authDomain: "app-trewa.firebaseapp.com",
+            projectId: "app-trewa",
+            storageBucket: "app-trewa.appspot.com",
+            messagingSenderId: "454840246304",
+            appId: "1:454840246304:web:7e20cc6feb7c82b84f5c45",
+            measurementId: "G-DDJSWJCWHN"));
   } else {
     await Firebase.initializeApp();
   }
